@@ -30,23 +30,6 @@ UserSchema.pre("save", function save(next) {
 
 // Helper method for validating user's password.
 
-// UserSchema.methods.comparePassword = function comparePassword(
-//   candidatePassword,
-//   cb
-// ) {
-//   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-//     cb(err, isMatch);
-//   });
-// };
-
-// UserSchema.methods.comparePassword = function(candidatePassword, cb) {
-//     console.log('Comparing passwords...');
-//     bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-//       console.log('Error:', err);
-//       console.log('Is Match:', isMatch);
-//       cb(err, isMatch);
-//     });
-//   };
 
 UserSchema.methods.comparePassword = function comparePassword(
   candidatePassword
