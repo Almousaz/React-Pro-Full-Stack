@@ -1,12 +1,12 @@
 import React from 'react';
-// import Header from './Header'; // Assuming you have a Header component
-// import Footer from './Footer'; // Assuming you have a Footer component
+import Header from '../components/Header'; // Assuming you have a Header component
+import Footer from '../components/Footer'; // Assuming you have a Footer component
 
 const PostDetailPage = ({ post, user }) => {
     return (
         <div>
             <h1>Post Detail Page</h1>
-            {/* <Header />
+            <Header />
             <div className="container">
                 <div className="row justify-content-center mt-5">
                     <div className="col-6">
@@ -41,7 +41,7 @@ const PostDetailPage = ({ post, user }) => {
                     </div>
                 </div>
             </div>
-            <Footer /> */}
+            <Footer />
         </div>
     );
 };

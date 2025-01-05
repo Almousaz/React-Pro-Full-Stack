@@ -1,50 +1,50 @@
 import React, { useState } from 'react';
-// import Header from './Header'; // Assuming you have a Header component
-// import Footer from './Footer'; // Assuming you have a Footer component
+import Header from '../components/Header'; // Assuming you have a Header component
+import Footer from '../components/Footer'; // Assuming you have a Footer component
 
 const UserProfile = ({ user, posts }) => {
-    // const [formData, setFormData] = useState({
-    //     title: '',
-    //     caption: '',
-    //     file: null,
-    // });
+    const [formData, setFormData] = useState({
+        title: '',
+        caption: '',
+        file: null,
+    });
 
-    // const handleChange = (e) => {
-    //     if (e.target.name === 'file') {
-    //         setFormData({
-    //             ...formData,
-    //             [e.target.name]: e.target.files[0],
-    //         });
-    //     } else {
-    //         setFormData({
-    //             ...formData,
-    //             [e.target.name]: e.target.value,
-    //         });
-    //     }
-    // };
+    const handleChange = (e) => {
+        if (e.target.name === 'file') {
+            setFormData({
+                ...formData,
+                [e.target.name]: e.target.files[0],
+            });
+        } else {
+            setFormData({
+                ...formData,
+                [e.target.name]: e.target.value,
+            });
+        }
+    };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    //     const form = new FormData();
-    //     form.append('title', formData.title);
-    //     form.append('caption', formData.caption);
-    //     form.append('file', formData.file);
+        const form = new FormData();
+        form.append('title', formData.title);
+        form.append('caption', formData.caption);
+        form.append('file', formData.file);
 
-    //     const response = await fetch('/post/createPost', {
-    //         method: 'POST',
-    //         body: form,
-    //     });
+        const response = await fetch('/post/createPost', {
+            method: 'POST',
+            body: form,
+        });
 
-    //     if (response.ok) {
-    //         // Optionally refresh posts or handle success
-    //     }
-    // };
+        if (response.ok) {
+            // Optionally refresh posts or handle success
+        }
+    };
 
     return (
         <div>
             <h1>User Profile</h1>
-            {/* <Header />
+            <Header />
             <div className="container">
                 <div className="row mt-5">
                     <div className="col-6">
@@ -107,7 +107,7 @@ const UserProfile = ({ user, posts }) => {
                     </div>
                 </div>
             </div>
-            <Footer /> */}
+            <Footer />
         </div>
     );
 };

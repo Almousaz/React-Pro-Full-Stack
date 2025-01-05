@@ -1,38 +1,39 @@
 import React, { useState } from 'react';
-// import Header from './Header'; // Assuming you have a Header component
-// import Footer from './Footer'; // Assuming you have a Footer component
+import Header from '../components/Header'; // Assuming you have a Header component
+import Footer from '../components/Footer'; // Assuming you have a Footer component
 
 const LoginForm = () => {
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [errors, setErrors] = useState([]);
-    // const [info, setInfo] = useState([]);
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [info, setInfo] = useState([]);
 
-    //     // Example POST request to '/login'
-    //     const response = await fetch('/login', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({ email, password }),
-    //     });
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    //     const result = await response.json();
+        // Example POST request to '/login'
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
 
-    //     if (result.errors) {
-    //         setErrors(result.errors);
-    //     }
+        const result = await response.json();
 
-    //     if (result.info) {
-    //         setInfo(result.info);
-    //     }
-    // };
+        if (result.errors) {
+            setErrors(result.errors);
+        }
+
+        if (result.info) {
+            setInfo(result.info);
+        }
+    };
 
     return (
         <div>
-            <h1>Login Form</h1>
-            {/* <Header />
+            {/* <h1>Login Form</h1> */}
+            {/* <Header /> */}
             <main className="container">
                 <div className="row justify-content-center">
                     <section className="col-6 mt-5">
@@ -78,7 +79,7 @@ const LoginForm = () => {
                     </section>
                 </div>
             </main>
-            <Footer /> */}
+            <Footer />
         </div>
     );
 };

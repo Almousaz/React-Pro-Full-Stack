@@ -22,6 +22,8 @@ function App() {
 
     <Router>
       <NavBar />
+      {/* Conditionally render NavBar */}
+      {/* {!isIndexPage && <NavBar />} */}
       <Container>
       <Routes>
         {/* <Route path="/" element={<HomePage />} />
