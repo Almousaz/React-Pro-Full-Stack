@@ -20,6 +20,17 @@ connectDB();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+
+
+//Routes
+app.use("/api/auth", require("./Auth/route"));
+
+
+
+
+
+
 const server = app.listen(PORT, () => console.log(`Server Connected to port ${PORT}`));
 
 process.on("unhandledRejection", (err) => {
