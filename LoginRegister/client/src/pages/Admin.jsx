@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Admin() {
   const [users, setUsers] = useState([]);
@@ -9,7 +10,7 @@ function Admin() {
     // Fetch the users data when the component mounts
     const getUsers = async () => {
       try {
-        const res = await fetch('/api/auth/getUsers');
+        const res = await axios('http://localhost:6363/api/auth/getUsers');
         const data = await res.json();
         if (data.user) {
           setUsers(data.user.filter(user => user.username !== 'admin')); // Filter out the admin user
@@ -23,7 +24,7 @@ function Admin() {
 
   const handleEditRole = async (id, index) => {
     try {
-      const res = await fetch('/api/auth/update', {
+      const res = await axios('http://localhost:6363/api/auth/update', {
         method: 'PUT',
         body: JSON.stringify({ role: 'admin', id }),
         headers: { 'Content-Type': 'application/json' }
@@ -46,7 +47,7 @@ function Admin() {
 
   const handleDeleteUser = async (id, index) => {
     try {
-      const res = await fetch('/api/auth/deleteUser', {
+      const res = await axios('http://localhost:6363/api/auth/getUser', {
         method: 'DELETE',
         body: JSON.stringify({ id }),
         headers: { 'Content-Type': 'application/json' }

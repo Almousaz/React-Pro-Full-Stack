@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -10,7 +12,7 @@ const Login = () => {
     setError('');
 
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await axios('http://localhost:6363/api/auth/login', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
         headers: { 'Content-Type': 'application/json' },

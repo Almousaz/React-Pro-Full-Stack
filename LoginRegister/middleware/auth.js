@@ -1,45 +1,45 @@
-const jwt = require("jsonwebtoken")
-const jwtSecret = process.env.JWT_SECRET
+const jwt = require("jsonwebtoken");
 
+const jwtSecret = process.env.JWT_SECRET;
 
 exports.adminAuth = (req, res, next) => {
-  const token = req.cookies.jwt
+  const token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, jwtSecret, (err, decodedToken) => {
       if (err) {
-        return res.status(401).json({ message: "Not authorized" })
+        return res.status(401).json({ message: "Not authorized" });
       } else {
         if (decodedToken.role !== "admin") {
-          return res.status(401).json({ message: "Not authorized" })
+          return res.status(401).json({ message: "Not authorized" });
         } else {
-          next()
+          next();
         }
       }
-    })
+    });
   } else {
     return res
       .status(401)
-      .json({ message: "Not authorized, token not available" })
+      .json({ message: "Not authorized, token not available" });
   }
-}
+};
 
 exports.userAuth = (req, res, next) => {
-    const token = req.cookies.jwt
-    if (token) {
-      jwt.verify(token, jwtSecret, (err, decodedToken) => {
-        if (err) {
-          return res.status(401).json({ message: "Not authorized" })
+  const token = req.cookies.jwt;
+  if (token) {
+    jwt.verify(token, jwtSecret, (err, decodedToken) => {
+      if (err) {
+        return res.status(401).json({ message: "Not authorized" });
+      } else {
+        if (decodedToken.role !== "Basic") {
+          return res.status(401).json({ message: "Not authorized" });
         } else {
-          if (decodedToken.role !== "Basic") {
-            return res.status(401).json({ message: "Not authorized" })
-          } else {
-            next()
-          }
+          next();
         }
-      })
-    } else {
-      return res
-        .status(401)
-        .json({ message: "Not authorized, token not available" })
-    }
+      }
+    });
+  } else {
+    return res
+      .status(401)
+      .json({ message: "Not authorized, token not available" });
   }
+};

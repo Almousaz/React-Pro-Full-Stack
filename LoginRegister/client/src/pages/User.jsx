@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const User = () => {
   const [users, setUsers] = useState([]);
@@ -6,7 +7,7 @@ const User = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('/api/auth/getUsers');
+        const response = await axios('http://localhost:6363/api/auth/getUsers');
         const data = await response.json();
         setUsers(data.user.filter((user) => user.username !== 'admin'));
       } catch (error) {

@@ -94,43 +94,46 @@ exports.register = async (req, res, next) => {
     }
   };
 
-exports.update = async (req, res, next) => {
-  const { role, id } = req.body;
-
-  // Verify if role and id are present
-  if (!role || !id) {
-    return res.status(400).json({ message: "Role or Id not present" });
-  }
-
-  // Verify if the value of role is "admin"
-  if (role !== "admin") {
-    return res.status(400).json({ message: "Role is not admin" });
-  }
-
-  try {
-    // Find the user with the provided id
-    const user = await User.findById(id);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+  exports.update = async (req, res, next) => {
+    const { role, id } = req.body;
+    // Verifying if role and id is presnt
+    if (role && id) {
+      // Verifying if the value of role is admin
+      if (role === "admin") {
+        // Finds the user with the id
+        await User.findById(id)
+          .then((user) => {
+            // Verifies the user is not an admin
+            if (user.role !== "admin") {
+              user.role = role;
+              user.save((err) => {
+                //Monogodb error checker
+                if (err) {
+                  return res
+                    .status("400")
+                    .json({ message: "An error occurred", error: err.message });
+                  process.exit(1);
+                }
+                res.status("201").json({ message: "Update successful", user });
+              });
+            } else {
+              res.status(400).json({ message: "User is already an Admin" });
+            }
+          })
+          .catch((error) => {
+            res
+              .status(400)
+              .json({ message: "An error occurred", error: error.message });
+          });
+      } else {
+        res.status(400).json({
+          message: "Role is not admin",
+        });
+      }
+    } else {
+      res.status(400).json({ message: "Role or Id not present" });
     }
-
-    // Check if the user is already an admin
-    if (user.role === "admin") {
-      return res.status(400).json({ message: "User is already an Admin" });
-    }
-
-    // Update the user's role
-    user.role = role;
-    await user.save(); // Save changes to the database
-
-    return res.status(201).json({ message: "Update successful", user });
-  } catch (error) {
-    return res
-      .status(400)
-      .json({ message: "An error occurred", error: error.message });
-  }
-};
+  };
 
 exports.deleteUser = async (req, res, next) => {
   const { id } = req.body;
