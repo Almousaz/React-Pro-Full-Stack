@@ -3,7 +3,7 @@ const Mongoose = require("mongoose");
 
 
 const connectDB = async () => {
-  Mongoose.connect(process.env.LOCAL_DB, {
+  Mongoose.connect(process.env.DB_CONNECT, {
   })
     .then((client) => {
       console.log(`MongoDB Connected ${client.connection.host}`);

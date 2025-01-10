@@ -25,16 +25,38 @@ const App = () => {
     <Router>
       {/* Conditionally render Navbar only if user is authenticated */}
       {isAuthenticated && <Navbar />}
-      
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/register" element={<Register />} />
+
         
-        {/* Protected routes */}
-        <Route path="/dashboard" element={<ProtectedRoute isAuthenticated={isAuthenticated} component={<Dashboard />} />} />
-        <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} component={<Profile />} />} />
-        <Route path="/about" element={<ProtectedRoute isAuthenticated={isAuthenticated} component={<About />} />} />
+        {/* Protected Routes */}
+        <Route 
+          path="/dashboard" 
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Dashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/profile" 
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Profile />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/about" 
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <About />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
     </Router>
   );
