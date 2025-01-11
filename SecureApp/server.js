@@ -4,6 +4,7 @@ const app = express();
 const cors = require('cors');
 const connectDB = require('./config/database');
 const AuthRoutes = require('./routes/Auth');
+const cookieParser = require('cookie-parser')
 
 
 
@@ -16,6 +17,7 @@ connectDB();
 
 //  Middleware
 app.use(express.json());
+app.use(cookieParser())
 app.use(cors());
 
 

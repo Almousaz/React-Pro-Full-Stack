@@ -1,11 +1,13 @@
 const express = require("express");
-const register = require("../controllers/Auth");
+const {Register , Login , Logout } = require("../controllers/Auth");
 const AuthRoutes = express.Router()
 
 
 
 
-AuthRoutes.post('/register' , register)
+AuthRoutes.post('/register' , Register)
+AuthRoutes.post('/login' , Login)
+AuthRoutes.post('/logout' , Logout)
 
 
 
