@@ -4,7 +4,8 @@ const app = express();
 const cors = require('cors');
 const connectDB = require('./config/database');
 const AuthRoutes = require('./routes/Auth');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const AdminRoutes = require('./routes/AdminRoutes');
 
 
 
@@ -23,6 +24,7 @@ app.use(cors());
 
 //  Route
 app.use('/api/auth' , AuthRoutes)
+app.use('/api/admin' , AdminRoutes)
 
 
 const PORT = process.env.PORT || 6060;
