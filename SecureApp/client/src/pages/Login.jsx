@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-
-
+import  { toast } from 'react-hot-toast';
 
 
 
@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
       console.log(email,password)
       try {
-          const request= await post('/api/auth/login',{email,password})
+          const request= await axios.post('http://localhost:3636/api/auth/login',{email,password})
           const reponse= request.data 
 
           if (request.status==200) {
@@ -28,7 +28,8 @@ const Login = () => {
                navigate('/')
             }
             toast.success(reponse.message)
-            dispatch(SetUser(reponse.user))
+            // dispatch(SetUser(reponse.user))
+            
           }
           console.log(reponse)
       } catch (error) {
@@ -45,7 +46,6 @@ const Login = () => {
 
     <div className='login-container'>
     <h2>Login</h2>
-
     <form onSubmit={handleSubmit}>
         <div className='input-group'>
             <label htmlFor="Email">Email</label>
