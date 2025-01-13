@@ -9,9 +9,18 @@ import  { Toaster } from 'react-hot-toast';
 import AdminLaouts from './Layouts/AdminLaouts'
 import UserLayout from './Layouts/UserLayout'
 import PublicLayouts from './Layouts/PublicLayouts'
+// import { useDispatch,useSelector } from 'react-redux'
+// import { updateUser } from './redux/AuthSlice'
 
 
 function App() {
+
+  // const user=useSelector((state)=>state.Auth.user)
+  // const disptch=useDispatch()
+  //   useEffect(()=>{
+           
+  //         disptch(updateUser())
+  //   },[user])
 
   return (
    
@@ -21,7 +30,7 @@ function App() {
       <Route path='/' element={<UserLayout/>}>
         <Route index element={<Home />} />
       </Route>
-      <Route path='admin' element={<AdminLaouts />}>
+      <Route path='/admin' element={<AdminLaouts />}>
           <Route index element={<Admin /> } />
       </Route>
       <Route path='/' element={<PublicLayouts/>}>

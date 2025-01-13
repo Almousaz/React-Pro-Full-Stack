@@ -2,7 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Logout } from "../redux/AuthSlice";
-import axios from "axios";
+// import axios from "axios";
+import { post } from '../services/ApiEndpoint'
 
 const Home = () => {
   const user = useSelector((state) => state.Auth.user);
@@ -15,7 +16,7 @@ const Home = () => {
 
   const handleLogout = async () => {
     try {
-      const request = await axios.post("http://localhost:3636/api/auth/logout");
+      const request = await post("/api/auth/logout");
       const resspone = request.data;
       if (request.status == 200) {
         disptach(Logout());

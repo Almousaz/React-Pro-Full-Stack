@@ -11,11 +11,11 @@ const persistConfig = {
     // whitelist: ['Auth'] // Assuming 'user' is the slice to persist
 };
 
-const Reducer = persistReducer(persistConfig, AuthSlice);
+const persistedReducer = persistReducer(persistConfig, AuthSlice);
 
 export const store = configureStore({
     reducer: {
-        Auth: Reducer // Correctly setting the persisted reducer under its slice name
+        Auth: persistedReducer // Correctly setting the persisted reducer under its slice name
     }
 
 });

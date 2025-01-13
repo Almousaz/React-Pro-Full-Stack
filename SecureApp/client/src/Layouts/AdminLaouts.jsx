@@ -5,9 +5,10 @@ import { useSelector } from 'react-redux'
 
 
 const  AdminLaouts = () => {
+    
     const user=useSelector((state) => state.Auth.user)
        const navigate=useNavigate()
-    // console.log(user)
+    console.log(user)
 
     useEffect(()=>{
            if (!user || user.role !=="admin") {

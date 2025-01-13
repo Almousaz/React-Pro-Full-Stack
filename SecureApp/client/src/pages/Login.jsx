@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
+import { post } from '../services/ApiEndpoint'
 import { Link, useNavigate } from 'react-router-dom'
 import  { toast } from 'react-hot-toast';
 import { SetUser } from '../redux/AuthSlice';
@@ -24,7 +25,7 @@ const Login = () => {
     e.preventDefault();
       console.log(email,password)
       try {
-          const request= await axios.post('http://localhost:3636/api/auth/login',{email,password})
+          const request= await post('/api/auth/login',{email,password})
           const reponse= request.data 
 
           if (request.status==200) {

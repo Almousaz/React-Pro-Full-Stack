@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Link } from "react-router-dom";
-// import { post } from '../services/ApiEndpoint'
+import { post } from '../services/ApiEndpoint'
 import { toast } from "react-hot-toast";
 
 const Register = () => {
@@ -12,8 +12,8 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const request = await axios.post(
-        "http://localhost:3636/api/auth/register",
+      const request = await post(
+        "/api/auth/register",
         { name, email, password }
       );
       const reposne = request.data;

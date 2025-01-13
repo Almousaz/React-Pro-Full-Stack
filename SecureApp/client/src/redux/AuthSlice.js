@@ -1,17 +1,17 @@
 import { createSlice , createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 
+export const updateUser=createAsyncThunk('updateuser',async()=>{
+     try {
+        const request = await axios.get('http://localhost:3636/api/auth/CheckUser')
+        const response=request.data
 
-// export const updateUser=createAsyncThunk('updateuser',async()=>{
-//      try {
-//         const request=await get('http://localhost:3636/api/auth/CheckUser')
-//         const response=request.data
-
-//         return response;
-//      } catch (error) {
-//           throw error
-//      }
-// })
+        return response;
+     } catch (error) {
+          throw error
+     }
+})
 
 
 
@@ -25,7 +25,7 @@ const AuthSlice = createSlice({
     initialState:initialState,
     reducers:{
         SetUser:(state,action)=>{
-            state.user= action.payload
+            state.user = action.payload
         },
         Logout:(state)=>{
             state.user=null,
@@ -34,21 +34,21 @@ const AuthSlice = createSlice({
         }
     },
 
-    // extraReducers:(builder)=>{
-    //     builder.addCase(updateUser.pending,(state)=>{
-    //         state.loading=true
-    //     })
-    //     builder.addCase(updateUser.fulfilled,(state,action)=>{
-    //         state.loading=null,
-    //         state.user=action.payload
-    //     })
-    //     builder.addCase(updateUser.rejected,(state,action)=>{
-    //         state.loading=null,
-    //         state.error=action.error.message,
-    //         state.user=null
+    extraReducers:(builder)=>{
+        builder.addCase(updateUser.pending,(state)=>{
+            state.loading=true
+        })
+        builder.addCase(updateUser.fulfilled,(state,action)=>{
+            state.loading=null,
+            state.user=action.payload
+        })
+        builder.addCase(updateUser.rejected,(state,action)=>{
+            state.loading=null,
+            state.error=action.error.message,
+            state.user=null
             
-    //     })
-    // }
+        })
+    }
    
 })
 
