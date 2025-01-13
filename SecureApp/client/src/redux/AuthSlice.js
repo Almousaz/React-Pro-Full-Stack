@@ -1,10 +1,11 @@
 import { createSlice , createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+// import axios from 'axios';
+import { get } from '../services/ApiEndpoint';
 
 
 export const updateUser=createAsyncThunk('updateuser',async()=>{
      try {
-        const request = await axios.get('http://localhost:3636/api/auth/CheckUser')
+        const request = await get('/api/auth/CheckUser')
         const response=request.data
 
         return response;
