@@ -2,10 +2,16 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import  { toast } from 'react-hot-toast';
-
-
+import { SetUser } from '../redux/AuthSlice';
+import {useDispatch,useSelector } from 'react-redux'
 
 const Login = () => {
+
+
+  const user=useSelector((state)=>state.Auth)
+  console.log(user)
+    const dispatch=useDispatch()
+
 
 
   const [email,setEmail]=useState('')
@@ -28,7 +34,7 @@ const Login = () => {
                navigate('/')
             }
             toast.success(reponse.message)
-            // dispatch(SetUser(reponse.user))
+            dispatch(SetUser(reponse.user))
             
           }
           console.log(reponse)

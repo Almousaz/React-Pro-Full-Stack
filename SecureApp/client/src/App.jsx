@@ -6,6 +6,9 @@ import Register from './pages/Register'
 import Admin from './pages/Admin'
 import './App.css'
 import  { Toaster } from 'react-hot-toast';
+import AdminLaouts from './Layouts/AdminLaouts'
+import UserLayout from './Layouts/UserLayout'
+import PublicLayouts from './Layouts/PublicLayouts'
 
 
 function App() {
@@ -15,10 +18,16 @@ function App() {
    <BrowserRouter>
    <Toaster/>
     <Routes>
-      <Route path='/'element={<Home />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/register' element={<Register /> } />
-      <Route path='/admin' element={<Admin /> } />
+      <Route path='/' element={<UserLayout/>}>
+        <Route index element={<Home />} />
+      </Route>
+      <Route path='admin' element={<AdminLaouts />}>
+          <Route index element={<Admin /> } />
+      </Route>
+      <Route path='/' element={<PublicLayouts/>}>
+        <Route path='login' element={<Login />} />
+        <Route path='register' element={<Register /> } />
+      </Route>
       
     </Routes>
    
