@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard";
 import AddStudent from "./components/AddStudent";
 import Logout from "./components/Logout";
 import axios from "axios";
+import AddBook from "./components/AddBook";
 
 function App() {
 
@@ -40,6 +41,9 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/addstudent" element={<AddStudent />} />
         <Route path="/logout" element={<Logout setRole = {setRole} />} />
+        <Route path="/addstudent" element={<AddStudent />} />
+        <Route path="/addbook" element={<AddBook />} />
+
       </Routes>
     </BrowserRouter>
   );

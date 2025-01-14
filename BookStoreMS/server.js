@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import "./config/database.js/";
 import { AdminRouter } from "./routes/auth.js";
 import { StudentRouter } from "./routes/student.js";
+import { bookRouter } from "./routes/book.js";
 
 app.use(express.json());
 app.use(cors({
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 app.use("/auth", AdminRouter);
 app.use('/student', StudentRouter)
+app.use('/book', bookRouter)
 
 // connect to database
 // connectDB();
