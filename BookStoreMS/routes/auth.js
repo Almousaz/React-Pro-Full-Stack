@@ -1,11 +1,80 @@
 import express from "express";
 import { Admin } from "../models/Admin.js";
+import { Student } from "../models/Student.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
+
+    try {
+        const { username, password, role } = req.body;
+    
+            
+        // Check the role type
+        if (role === "admin") {
+          const admin = await Admin.findOne({ username });
+          if (!admin) {
+            return res.status(404).json({ message: "Admin not registered!" });
+          }
+    
+          const validPassword = await bcrypt.compare(password, admin.password);
+          if (!validPassword) {
+            return res.status(401).json({ message: "Wrong password!" });
+          }
+    
+          const token = jwt.sign(
+            { username: admin.username, role: "admin" },
+            process.env.Admin_Key
+          );
+    
+          res.cookie("token", token, { httpOnly: true, secure: true });
+          return res.status(200).json({ login: true, role: "admin" });
+        } else if (role === "student") {
+          const student = await Student.findOne({ username });
+          if (!student) {
+            return res.status(404).json({ message: "Student not registered!" });
+          }
+    
+          const validPassword = await bcrypt.compare(password, student.password);
+          if (!validPassword) {
+            return res.status(401).json({ message: "Wrong password!" });
+          }
+    
+          const token = jwt.sign(
+            { username: student.username, role: "student" },
+            process.env.Student_Key
+          );
+    
+          res.cookie("token", token, { httpOnly: true, secure: true });
+          return res.status(200).json({ login: true, role: "student" });
+        } else {
+          return res.status(400).json({ message: "Invalid role!" });
+        }
+      } catch (error) {
+        console.error("Error in login:", error);
+        return res.status(500).json({ message: "Internal server error!" });
+      }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //   const { username, password, role } = req.body;
   //   if (role === "admin") {
   //     const admin = await Admin.findOne({ username });
@@ -25,35 +94,112 @@ router.post("/login", async (req, res) => {
   //     return res.json({ login: true, role: "admin" });
   //   }
 
-  try {
-    const { username, password, role } = req.body;
+//   try {
+//     const { username, password, role } = req.body;
 
-    if (role !== "admin") {
-      return res.status(400).json({ message: "Invalid role!" });
-    }
+//     // if (role !== "admin") {
+//     //   return res.status(400).json({ message: "Invalid role!" });
+//     // }
 
-    const admin = await Admin.findOne({ username });
-    if (!admin) {
-      return res.status(404).json({ message: "Admin not registered!" });
-    }
+//     const admin = await Admin.findOne({ username });
+//     if (!admin) {
+//       return res.status(404).json({ message: "Admin not registered!" });
+//     }
 
-    const validPassword = await bcrypt.compare(password, admin.password);
-    if (!validPassword) {
-      return res.status(401).json({ message: "Wrong password!" });
-    }
+//     const validPassword = await bcrypt.compare(password, admin.password);
+//     if (!validPassword) {
+//       return res.status(401).json({ message: "Wrong password!" });
+//     } const token = jwt.sign({ username: admin.username, role: "admin" }, process.env.Admin_Key
+//     );
+//    res.cookie("token", token, { httpOnly: true, secure: true });
+//    return res.status(200).json({ login: true, role: "admin" });
 
-    const token = jwt.sign(
-      { username: admin.username, role: "admin" },
-      process.env.Admin_Key
-    );
 
-    res.cookie("token", token, { httpOnly: true, secure: true });
+//    if (role === "student") {
+//     const student = await Student.findOne({ username });
+//     if (!student) {
+//       return res.json({ message: "student not registered ! " });
+//     }
+//     const validPassword = await bcrypt.compare(password, student.password);
+//     if (!validPassword) {
+//       return res.json({ message: "wrong password !" });
+//     }
+//     const token = jwt.sign(
+//       { username: student.username, role: "student" },
+//       process.env.Student_Key
+//     );
 
-    return res.status(200).json({ login: true, role: "admin" });
-  } catch (error) {
-    console.error("Error in admin login:", error);
-    return res.status(500).json({ message: "Internal server error!" });
+//     res.cookie("token", token, { httpOnly: true, secure: true });
+//     return res.json({ login: true, role: "student" });
+//   }
+    
+
+
+
+
+  
+    
+//   } catch (error) {
+//     console.error("Error in admin login:", error);
+//     return res.status(500).json({ message: "Internal server error!" });
+//   }
+
+
+const verifyAdmin = (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.json({ message: "Invalid Admin" });
+  } else {
+    jwt.verify(token, process.env.Admin_Key, (err, decoded) => {
+      if (err) {
+        return res.json({ message: "Invalid token" });
+      } else {
+        req.username = decoded.username;
+        req.role = decoded.role;
+        next();
+      }
+    });
   }
-});
+};
 
-export { router as AdminRouter };
+
+const verifyUser = (req, res, next) => {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.json({ message: "Invalid User" });
+    } else {
+      jwt.verify(token, process.env.Admin_Key, (err, decoded) => {
+        if (err) {
+            jwt.verify(token, process.env.Student_Key, (err, decoded) => {
+                if (err) {
+                  return res.json({ message: "Invalid token" });
+                } else {
+                  req.username = decoded.username;
+                  req.role = decoded.role;
+                  next();
+                }
+              });
+        } else {
+          req.username = decoded.username;
+          req.role = decoded.role;
+          next();
+        }
+      });
+    }
+  };
+
+
+
+
+
+router.get('/verify' , verifyUser , (req , res) => {
+    return res.json({ login : true , role : req.role })
+})
+
+
+router.get('/logout' , (req , res) => {
+    res.clearCookie('token')
+    return res.json({logout : true})
+} )
+
+export { router as AdminRouter, verifyAdmin };

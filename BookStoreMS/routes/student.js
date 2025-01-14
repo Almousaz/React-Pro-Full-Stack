@@ -2,10 +2,10 @@ import express from "express";
 import { Student } from "../models/Student.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-
+import { verifyAdmin } from "./auth.js";
 const router = express.Router();
 
-router.post("/register", async (req, res) => {
+router.post("/register", verifyAdmin , async (req, res) => {
   try {
     const { username, password, roll, grade } = req.body;
     const student = await Student.findOne({ username });
