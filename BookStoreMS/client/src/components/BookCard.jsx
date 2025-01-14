@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const BookCard = ({book}) => {
 
@@ -13,7 +14,7 @@ const BookCard = ({book}) => {
         <p>{author}</p>
       </div>
       <div className='book-actions'>
-        <button>edit</button>
+        <button><Link to = {`/book/${book._id}`} className='btn-link'>edit</Link></button>
         <button>delete</button>
 
       </div>

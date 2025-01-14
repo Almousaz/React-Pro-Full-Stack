@@ -9,6 +9,7 @@ import AddStudent from "./components/AddStudent";
 import Logout from "./components/Logout";
 import axios from "axios";
 import AddBook from "./components/AddBook";
+import EditBook from "./components/EditBook";
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="/logout" element={<Logout setRole = {setRole} />} />
         <Route path="/addstudent" element={<AddStudent />} />
         <Route path="/addbook" element={<AddBook />} />
+        <Route path="/book/:id" element={<EditBook />} />
 
       </Routes>
     </BrowserRouter>
