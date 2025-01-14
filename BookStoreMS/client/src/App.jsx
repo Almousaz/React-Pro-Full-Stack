@@ -4,6 +4,8 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Books from "./components/Books";
 import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import AddStudent from "./components/AddStudent";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<Books />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/addstudent" element={<AddStudent />} />
       </Routes>
     </BrowserRouter>
   );
