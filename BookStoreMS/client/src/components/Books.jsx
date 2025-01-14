@@ -4,7 +4,7 @@ import BookCard from './BookCard'
 import '../components/css/Book.css'
 
 
-const Books = () => {
+const Books = ({role}) => {
 
   const [books , setBooks] = useState([])
 
@@ -26,7 +26,7 @@ const Books = () => {
     <div className='book-list'>
       {
         books.map(book => {
-         return <BookCard key={book.id} book = {book} ></BookCard>
+         return <BookCard key={book.id} book = {book} role = {role} ></BookCard>
         })
       }
       
