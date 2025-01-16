@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 import connectDB from "./libs/database.js";
 import AuthRoutes from "./routes/Auth.js";
 import ProductRoutes from "./routes/Product.js";
+import cors from 'cors'
 const app = express();
 dotenv.config();
 
 connectDB();
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/auth", AuthRoutes);
 app.use('/product' , ProductRoutes)
