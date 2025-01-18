@@ -10,7 +10,10 @@ dotenv.config();
 connectDB();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:5188'  
+}));
 
 app.use("/auth", AuthRoutes);
 app.use('/product' , ProductRoutes)

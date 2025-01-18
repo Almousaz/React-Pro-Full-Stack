@@ -8,7 +8,7 @@ const ProductSchema= new mongoose.Schema({
     desc:{
         type:String,
     },
-    ImageUrl:{
+    Image_url:{
         type:String,
     },
     userId:{
