@@ -30,7 +30,7 @@ const ProductCreate = async (req, res) => {
 const UpdateProduct = async (req, res) => {
   try {
     const ProductId = req.params.id;
-    const { title, desc, ImageUrl } = req.body;
+    const { title, desc, Image_url } = req.body;
     const FindProduct = await ProductModal.findById({ _id: ProductId });
     if (!FindProduct) {
       res.status(404).json({ success: false, message: "Products not Found" });
@@ -38,7 +38,7 @@ const UpdateProduct = async (req, res) => {
 
     const UpdateProduct = await ProductModal.findByIdAndUpdate(
       { _id: ProductId },
-      { title, desc, ImageUrl },
+      { title, desc, Image_url },
       { new: true }
     );
 

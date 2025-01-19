@@ -6,32 +6,25 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AddProductModal from "../components/AddProductModal";
 import EditModal from "../components/EditModal";
+import Delete from "../components/delete";
+import toast from "react-hot-toast";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const [reload , setReload] = useState(false)
-  // const [productId , setProductId] = useState('')
+  const [reload, setReload] = useState(false);
+  const [productId, setProductId] = useState("");
+  // console.log('productId' , productId)
+  const [show, setShow] = useState(false);
+  const [delId, setDelId] = useState("");
   const { Auth } = useSelector((state) => state.auth);
   console.log("User Auth:", Auth);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-
-
-  useEffect(()=>{
+  useEffect(() => {
     if (!Auth) {
-
-     navigate('/login')
-
+      navigate("/login");
     }
-   },[])
-
-
-
-
-
-
-
-
+  }, []);
 
   useEffect(() => {
     GetProducts();
@@ -54,23 +47,56 @@ const Home = () => {
 
   const closeModal = () => {
     document.getElementById("addProductModal").close();
-  }
+  };
 
-  const handleEditItem = () => {
+  const handleEditItem = (item) => {
     // alert('hello')
+    setProductId(item);
     document.getElementById("editmodal").showModal();
-
-  }
+  };
   const closeEditModal = () => {
     document.getElementById("editmodal").close();
-  }
+  };
 
+  const handleDelete = async (id) => {
+    setDelId(id);
+    setShow(true);
+  };
+
+  const handleDeleteApi = async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5250/product/delete/${delId}`
+      );
+
+      const data = response.data;
+      console.log("delete", data);
+      if (response.status == 200) {
+        toast.success(data.message, {
+          style: {
+            zIndex: 999,
+          },
+        });
+        setShow(false);
+
+        setReload((prev) => !prev);
+      }
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
       <Navbar />
-      <AddProductModal closeModal={closeModal} setReload = {setReload} />
-      <EditModal closeModal={closeEditModal}  />
+      <AddProductModal closeModal={closeModal} setReload={setReload} />
+      <EditModal
+        item={productId}
+        closeModal={closeEditModal}
+        setReload={setReload}
+      />
+      <Delete setShow={setShow} show={show} handleDlete={handleDeleteApi} />
       <div className="min-h-screen bg-gray-100 p-8">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-gray-800">
@@ -79,10 +105,11 @@ const Home = () => {
           <p className="text-gray-600">Explore the different options below</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          
-           {/* Rendering multiple cards */}
-           {products.length === 0 ? (
-            <h1 className="text-center font-bold text-xl text-gray-800">No Product Found</h1>
+          {/* Rendering multiple cards */}
+          {products.length === 0 ? (
+            <h1 className="text-center font-bold text-xl text-gray-800">
+              No Product Found
+            </h1>
           ) : (
             ""
           )}
@@ -91,12 +118,11 @@ const Home = () => {
               <Card
                 key={item.id} // Ensure to add a unique key for each card
                 item={item}
-                handleEdit={handleEditItem}
-                // handleDelete={()=>handleDelete(item._id)}
+                handleEdit={() => handleEditItem(item)}
+                handleDelete={() => handleDelete(item._id)}
               />
             );
           })}
-
         </div>
       </div>
     </>

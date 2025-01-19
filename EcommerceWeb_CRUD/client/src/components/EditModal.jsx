@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 
-const EditModal = ({closeModal , setReload}) => {
+const EditModal = ({item , closeModal , setReload}) => {
 
 
 
@@ -11,18 +11,20 @@ const EditModal = ({closeModal , setReload}) => {
     const [description, setDescription] = useState("");
     const [Image_url, setImage_url] = useState("");
     const {Auth}=useSelector((state)=>state.auth)
-    console.log(Auth)
+    // console.log(Auth)
+    // console.log('productId' , item)
 
 
     const handleSubmit = async(e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(`http://localhost:5250/product/create/${Auth._id}` , 
+            const response = await axios.put(`http://localhost:5250/product/update/${item._id}` , 
                 {
                     title,desc:description,Image_url:Image_url
                   }
             ) 
+            console.log('image url' , Image_url)
             const data = response.data
             
             if (response.status === 200) {
