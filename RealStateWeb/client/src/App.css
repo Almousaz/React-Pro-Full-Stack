@@ -172,7 +172,7 @@ h5 {
 /****************************HERO SECTION STYLING*********************************/
 #hero {
   min-height: 80vh;
-  background: url(/landing.jpg);
+  background: url(/Images/landing.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
