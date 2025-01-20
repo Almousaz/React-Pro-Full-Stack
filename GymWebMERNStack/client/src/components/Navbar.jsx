@@ -2,9 +2,9 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <div>
-      
-    </div>
+    <header>
+      <p>ELITE EDGE FITNESS</p>
+    </header>
   )
 }
 

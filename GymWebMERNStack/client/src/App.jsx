@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
+import "./index.css"
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import WorkoutSessions from './components/WorkoutSessions';
