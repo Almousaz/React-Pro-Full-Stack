@@ -1,10 +1,6 @@
-
-
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&family=Raleway&family=Rufina:wght@700&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
 
 * {
   margin: 0;
@@ -512,7 +508,7 @@ h5 {
   padding: 75px 20px;
   border-bottom-right-radius: 100px;
   height: 600px;
-  background: url(/host2.jpg);
+  background: url(/Images/host2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1061,7 +1057,7 @@ h5 {
   text-align: start;
 }
 @media (max-width: 1520px) {
-  #aboutPage{
+  #aboutPage {
     padding: 150px 20px 30px 20px;
   }
   #aboutPage .container {
@@ -1090,7 +1086,7 @@ h5 {
   gap: 15px;
   background: linear-gradient(176deg, #6868688c, transparent);
 }
-#contact .container{
+#contact .container {
   display: flex;
   border-bottom-left-radius: 50px;
   border-top-right-radius: 50px;
@@ -1099,11 +1095,11 @@ h5 {
   background: #fff;
   margin-top: 60px;
 }
-#contact .container img{
+#contact .container img {
   height: auto;
   flex: 4;
 }
-#contact .container .content{
+#contact .container .content {
   display: flex;
   gap: 20px;
   flex-direction: column;
@@ -1111,48 +1107,48 @@ h5 {
   padding: 30px;
   justify-content: center;
 }
-#contact .container .content h3{
+#contact .container .content h3 {
   text-align: start;
 }
-#contact .container .content div{
+#contact .container .content div {
   display: flex;
   align-items: center;
 }
-#contact .container .content div p{
+#contact .container .content div p {
   width: 120px;
 }
-#contact .container .content ul{
+#contact .container .content ul {
   display: flex;
   gap: 15px;
   color: #181d24;
 }
-#contact .container .content ul a{
+#contact .container .content ul a {
   text-decoration: none;
   color: #181d24;
 }
-#contact .container .content ul a svg{
+#contact .container .content ul a svg {
   font-size: 25px;
 }
-@media(max-width:1520px){
-  #contact .container{
+@media (max-width: 1520px) {
+  #contact .container {
     min-width: 100%;
     width: 100%;
   }
 }
-@media(max-width:912px){
-  #contact .container{
+@media (max-width: 912px) {
+  #contact .container {
     flex-direction: column;
   }
 }
 
 /*****************TERMS AND CONDITIONS PAGE STYLING**********************************/
-#termsandcond{
+#termsandcond {
   padding: 150px 20px 30px 20px;
   min-width: 1500px;
   max-width: 1500px;
   margin: 0 auto;
 }
-#termsandcond header{
+#termsandcond header {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -1160,20 +1156,20 @@ h5 {
   text-align: center;
   margin-bottom: 50px;
 }
-#termsandcond P{
+#termsandcond P {
   margin-bottom: 20px;
 }
-#termsandcond h5{
+#termsandcond h5 {
   text-align: start;
   margin-bottom: 10px;
 }
-#termsandcond .content{
+#termsandcond .content {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-@media(max-width: 1520px){
-  #termsandcond{
+@media (max-width: 1520px) {
+  #termsandcond {
     min-width: 100%;
     width: 100%;
   }
