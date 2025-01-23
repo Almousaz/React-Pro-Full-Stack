@@ -26,7 +26,7 @@ const Gallery = () => {
         </h1>
       </section>
       <div className="w-full flex flex-col justify-center items-center">
-        <div className="lg:w-[80%] w-full grid md:grid-cols-3 grid-cols-1 justify-center justify-items-center items-center gap-10 md:-mb[540px]">
+        <div className="lg:w-[80%] w-full grid md:grid-cols-3 grid-cols-1 justify-center justify-items-center items-center gap-10 md:-mb-[540px]">
           <img
             src={gal1}
             alt=""
