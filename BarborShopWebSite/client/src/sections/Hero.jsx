@@ -12,7 +12,9 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import { FaBeer } from "react-icons/fa";
 
+
 const Hero = () => {
+    
   useEffect(() => {
     Aos.init({
       offset: 200,
