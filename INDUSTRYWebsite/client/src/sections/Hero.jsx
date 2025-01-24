@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import heroImg from "/images/heroimg.png";
 import bgImg from "/images/bgimg.jpg";
+import '../index.css'
 import Aos from "aos";
 import "aos/dist/aos.css";
 
@@ -26,7 +27,7 @@ const Hero = () => {
           id="hero-image"
           className="lg:w-[40%] w-full flex flex-col justify-end items-end"
         >
-          <img src={heroImg} alt="" width={600} height={700} className="" />
+          <img src={heroImg} alt="" width={600} height={700} className="animate-scale-up-and-down" />
         </div>
         <div
           id="content-hero"
