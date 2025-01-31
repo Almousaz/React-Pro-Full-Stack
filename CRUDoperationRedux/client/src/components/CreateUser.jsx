@@ -4,25 +4,24 @@ import { addUser } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-
 function CreateUser() {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [age, setAge] = useState();
 
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [age, setAge] = useState()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        axios.post('http://localhost:8383/api/user/create', {name, email, age})
-        .then(res => {
-            dispatch(addUser(res.data))
-            navigate('/')
-        })
-        .catch(err => console.log(err))
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8383/api/user/create", { name, email, age })
+      .then((res) => {
+        dispatch(addUser(res.data));
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
