@@ -81,7 +81,7 @@ const getUserSignup = (req, res) => {
     if (validationErrors.length) {
       return res.status(400).json({ errors: validationErrors });
     }
-
+   
     req.body.email = validator.normalizeEmail(req.body.email, {
       gmail_remove_dots: false,
     });
@@ -98,6 +98,9 @@ const getUserSignup = (req, res) => {
         if (err) {
           return next(err);
         }
+        // console.log("🔹 Login Request Received:", req.body);
+        // console.log("🔹 Session Info:", req.session);
+        // console.log("🔹 Passport Auth Status:", req.isAuthenticated());
 
         // Respond with user data or a success message
         res.status(200).json({ success: "You are logged in!", user });

@@ -12,7 +12,7 @@ import { localStrategy } from "./config/passport.js";
 import postRoutes from './routes/postRoutes.js'
 import logger from 'morgan';
 import methodOverride from 'method-override';
-
+import cors from 'cors'
 
 
 const app = express();
@@ -20,6 +20,15 @@ dotenv.config();
 
 
 connectDB();
+
+
+app.use(cors({
+    origin: 'http://localhost:5179',  
+    methods: ['GET', 'POST'],  
+    allowedHeaders: ['Content-Type'],  
+    credentials: true // Allow credentials
+}));
+
 
 //Body Parsing
 app.use(express.json());
@@ -29,11 +38,14 @@ app.use(
       secret: "keyboard cat",
       resave: false,
       saveUninitialized: true,
+      cookie: { secure: false, httpOnly: true }, 
       store: MongoStore.create({
         mongoUrl: process.env.MONGO_URI , // Replace with your MongoDB URI
       }),
     })
   );
+
+
 
 //Use flash messages for errors, info, ect...
 app.use(flash());

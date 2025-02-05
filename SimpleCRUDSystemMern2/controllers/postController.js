@@ -35,23 +35,37 @@ const getFeed = async (req, res) => {
 
   const createPost = async (req, res) => {
     try {
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+        if (!req.file) {
+            return res.status(400).json({ message: "No file uploaded" });
+        }
 
-      await post.create({
-        title: req.body.title,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        caption: req.body.caption,
-        likes: 0,
-        user: req.user.id,
-      });
-      console.log("Post has been added!");
-      res.redirect("/profile");
+        // Upload image to Cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path);
+
+        // Create the post in the database
+        const newPost = await post.create({
+            title: req.body.title,
+            image: result.secure_url,
+            cloudinaryId: result.public_id,
+            caption: req.body.caption,
+            likes: 0,
+            user: req.user.id,
+        });
+
+        console.log("✅ Post has been added!");
+
+        // Respond with success message and the created post
+        res.status(201).json({
+            message: "Post created successfully!",
+            post: newPost
+        });
+
     } catch (err) {
-      console.log(err);
+        console.error("❌ Error creating post:", err);
+        res.status(500).json({ message: "Server error. Please try again later." });
     }
-  }
+};
+
 
   const getPost = async (req, res) => {
     try {
