@@ -1,27 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { HttpError } from '../models/errorModel.js'; 
+import asyncHandler from 'express-async-handler';
 
 
-// const authMiddleware = async (req, res, next) => {
-
-//     const Authorization = req.headers.authorization || req.headers.authorization;
-
-//     if (Authorization && Authorization.startsWith("Bearer")) {
-//         const token = Authorization.split(' ')[1]
-//         jwt.verify(token, process.env.JWT_SECRET, (err, info) => {
-            
-//             if (err) {
-//                 return next(new HttpError("Unathorized. Invalid token.", 403))
-//             }
-
-//             req.user = info;
-//             next()
-//         })
-//     } else {
-//         return next(new HttpError("Unathorized. No token", 401))
-//     }
-
-// }
 
 const authMiddleware = async (req, res, next) => {
     const Authorization = req.headers.Authorization || req.headers.authorization;
@@ -37,12 +18,16 @@ const authMiddleware = async (req, res, next) => {
             }
 
             req.user = info; // Attach user info to request object
+            console.log(req.user)
             next(); // Proceed to the next middleware or route handler
         });
     } else {
         return next(new HttpError("Unauthorized. No token", 401)); // 401 for missing token
     }
 };
+
+
+
 
 
 export { authMiddleware } 

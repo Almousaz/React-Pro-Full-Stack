@@ -10,16 +10,16 @@ const PostItem = ({ postID, category, title, description, authorID, thumbnail, c
     return (
         <article className='post'>
             <div className='post-thumbnail'>
-                <img src={`http://localhost:7380/api/uploads/${thumbnail}`} alt={title} />
+                <img src={`http://localhost:7380/uploads/${thumbnail}`} alt={title} />
             </div>
             <div className='post-content'>
-                <Link to={`/posts/${postID}`}>
+                <Link to={`http://localhost:7380/api/posts/${postID}`}>
                     <h3>{postTitle}</h3>
                 </Link>
                 <p dangerouslySetInnerHTML={{ __html: shortDescription }} />
                 <div className='post-footer'>
                     <PostAuthor authorID={authorID} createdAt={createdAt} />
-                    <Link to={`/posts/categories/${category}`} className='btn category'>{category}</Link>
+                    <Link to={`http://localhost:7380/api/posts/categories/${category}`} className='btn category'>{category}</Link>
                 </div>
             </div>
         </article>

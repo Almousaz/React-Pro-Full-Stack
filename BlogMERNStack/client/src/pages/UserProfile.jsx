@@ -81,7 +81,7 @@ const UserProfile = () => {
                 <div className='profile-details'>
                     <div className='avatar-wrapper'>
                         <div className='profile-avatar'>
-                            <img src={`http://localhost:7380/api/uploads/${avatar}`} alt='' />
+                            <img src={`http://localhost:7380/uploads/${avatar}`} alt='' />
                         </div>
                         <form className='avatar-form'>
                             <input type='file' name='avatar' id='avatar' onChange={e => setAvatar(e.target.files[0])} accept='png, jpg, jpeg' />

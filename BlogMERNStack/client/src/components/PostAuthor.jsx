@@ -26,9 +26,9 @@ const PostAuthor = ({ authorID, createdAt }) => {
     }, [])
 
     return (
-        <Link to={`/posts/users/${authorID}`} className='post-author'>
+        <Link to={`http://localhost:7380/api/posts/users/${authorID}`} className='post-author'>
             <div className='post-author-avatar'>
-                <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${author?.avatar}`} alt='' />
+                <img src={`http://localhost:7380/uploads/${author?.avatar}`} alt='' />
             </div>
             <div className='post-author-details'>
                 <h5>By : {author?.name}</h5>

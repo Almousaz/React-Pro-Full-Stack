@@ -1,0 +1,53 @@
+/* Product CSS */
+.Product-div {
+    width: 100%;
+    margin-top: 2%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* More responsive */
+    grid-template-rows: auto;
+    gap: 30px;
+    padding: 10px;
+}
+
+.ProCont {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 10px;
+    width: 80%; /* Adjusted for better fit */
+    margin: auto;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: transform 0.2s ease-in-out;
+}
+
+.ProCont:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+.ProCont > img {
+    height: 280px;
+    width: 100%; /* Full width for better adaptability */
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+.ProCont > h3, .ProCont > p {
+    text-align: center;
+    font-weight: 500;
+    margin: 10px 0;
+    color: #333;
+}
+
+.ProCont > h3 {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.price-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #28a745; /* Matching the design */
+    text-align: center;
+    margin-top: 10px;
+}
