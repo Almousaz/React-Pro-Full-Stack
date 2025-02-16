@@ -48,16 +48,16 @@ const LoginPage = () => {
       headers: {'Content-Type':'application/json'},
       credentials: 'include',
     });
-    // if (response.ok) {
-    // //   response.json().then(userInfo => {
-    // //     setUserInfo(userInfo);
-    //     notify();
-    //     // setRedirect(true);
-    //   });
-    // } else {
-    //     notifyError()
-    //     // alert('wrong credentials');
-    // }
+    if (response.ok) {
+      response.json().then(userInfo => {
+        setUserInfo(userInfo);
+        notify();
+        setRedirect(true);
+      });
+    }else{
+        notifyError()
+        // alert('wrong credentials');
+    }
   }
 
 

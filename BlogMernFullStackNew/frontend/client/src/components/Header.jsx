@@ -7,23 +7,27 @@ import { UserContext } from "../context/UserContext";
 const Header = () => {
 
     const {setUserInfo,userInfo} = useContext(UserContext);
+    // const [username,setUsername] = useState(null)
 
   useEffect(() => {
-    fetch('http://localhost:4000/profile', {
+    fetch('http://localhost:6009/api/profile', {
       credentials: 'include',
     }).then(response => {
       response.json().then(userInfo => {
+        // setUsername(userInfo.username)
         setUserInfo(userInfo);
       });
     });
   }, []);
 
   function logout() {
-    fetch('http://localhost:4000/logout', {
+    fetch('http://localhost:6009/api/logout', {
       credentials: 'include',
       method: 'POST',
     });
+    // setUsername(userInfo.username)
     setUserInfo(null);
+    // setUsername(null)
   }
 
   const username = userInfo?.username;

@@ -28,11 +28,15 @@ const CreatePost = () => {
 
 
         e.preventDefault();
-        const response = await fetch('http://localhost:4000/post', {
+
+        // console.log(files[0])
+
+        const response = await fetch('http://localhost:6009/post', {
           method: 'POST',
           body: data,
           credentials: 'include',
         });
+        console.log(await response.json())
         if (response.ok) {
           setRedirect(true);
         }

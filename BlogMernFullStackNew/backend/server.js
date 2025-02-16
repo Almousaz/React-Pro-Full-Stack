@@ -9,7 +9,17 @@ import morgan from "morgan";
 import path from 'path'
 import connectDB from "./db/connectDB.js";
 import userRoutes from './routes/userRoutes.js'
+import cookieParser from "cookie-parser";
+const uploadMiddleware = multer({ dest: 'uploads/' });
+import { createPost, updatePost } from "./controllers/userController.js";
+import {fileURLToPath} from 'url';
 
+
+
+// middleware config
+// const __filename = new URL(import.meta.url).pathname;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 
@@ -19,6 +29,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
+app.use(cookieParser())
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors(
@@ -31,10 +42,15 @@ app.use(cors(
 
 
 
+app.use('/uploads', express.static(path.join(__dirname + '/uploads')));
+
 //    dara base connect
 connectDB();
 
 
+/* ROUTES WITH FILES */
+app.post("/post", uploadMiddleware.single("file"), createPost);
+app.put("/post" , uploadMiddleware.single('file') , updatePost)
 
 
 app.use('/api' , userRoutes)
