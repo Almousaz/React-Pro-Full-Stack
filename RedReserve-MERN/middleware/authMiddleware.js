@@ -1,16 +1,13 @@
-import jwt from 'jsonwebtoken'
-
-
+import jwt from 'jsonwebtoken';
 
 const authMiddleware = async (req, res, next) => {
-    
   try {
-    const token = req.headers["authorization"].split(" ")[1];
+    const token = req.headers['authorization'].split(' ')[1];
     jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
         return res.status(401).send({
           success: false,
-          message: "Auth Failed While Decrpytion",
+          message: 'Auth Failed While Decrpytion',
         });
       } else {
         req.body.userId = decode.userId;
@@ -22,10 +19,9 @@ const authMiddleware = async (req, res, next) => {
     return res.status(401).send({
       success: false,
       error,
-      message: "Auth Failed",
+      message: 'Auth Failed',
     });
   }
 };
 
-
-export {authMiddleware}
+export { authMiddleware };

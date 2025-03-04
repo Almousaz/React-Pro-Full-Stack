@@ -32,45 +32,40 @@ const signupUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-    try {
-        const { username, password } = req.body;
-        const userDoc = await User.findOne({ username });
+  try {
+    const { username, password } = req.body;
+    const userDoc = await User.findOne({ username });
 
-        if (!userDoc) {
-            return res.status(400).json({ message: "User not found" });
-        }
-
-        const passOk = bcrypt.compareSync(password, userDoc.password);
-
-        if (!passOk) {
-            return res.status(400).json({ message: "Wrong credentials" });
-        }
-
-        jwt.sign(
-            { username, id: userDoc._id },
-            process.env.JWT_SECRET,
-            {},
-            (err, token) => {
-                if (err) {
-                    console.error("JWT Sign Error:", err);
-                    return res.status(500).json({ message: "Internal Server Error" });
-                }
-
-                res.cookie("token", token, { httpOnly: true }).json({
-                    id: userDoc._id,
-                    username,
-                });
-            }
-        );
-    } catch (error) {
-        console.error("Login Error:", error);
-        res.status(500).json({ message: "Server error" });
+    if (!userDoc) {
+      return res.status(400).json({ message: "User not found" });
     }
+
+    const passOk = bcrypt.compareSync(password, userDoc.password);
+
+    if (!passOk) {
+      return res.status(400).json({ message: "Wrong credentials" });
+    }
+
+    jwt.sign(
+      { username, id: userDoc._id },
+      process.env.JWT_SECRET,
+    {},
+      (err, token) => {
+        if (err) {
+          console.error("JWT Sign Error:", err);
+          return res.status(500).json({ message: "Internal Server Error" });
+        }
+
+        res.cookie("token", token, { httpOnly: true }).json({
+          id: userDoc._id,
+          username,
+        });
+      }
+    );
+  } catch (error) {
+    console.error("Login Error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
-
-
-
-
-
-export { signupUser , loginUser };
+export { signupUser, loginUser };

@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 
 const ImageDetail = () => {
-  const { id } = useParams();
-  const [imageDetails, setImageDetails] = useState(null);
+  const { id } = useParams()
+  const [imageDetails, setImageDetails] = useState(null)
 
   const fetchImageDetails = async () => {
     try {
-      const url = `http://localhost:7005/api/${id}`;
-      const result = await fetch(url);
-      const { data } = await result.json();
-      console.log(data);
-      setImageDetails(data);
+      const url = `http://localhost:7005/api/${id}`
+      const result = await fetch(url)
+      const { data } = await result.json()
+      console.log(data)
+      setImageDetails(data)
     } catch (err) {
-      alert("Internal Server Error, Please try again");
+      alert('Internal Server Error, Please try again', err)
     }
-  };
+  }
   useEffect(() => {
-    fetchImageDetails();
-  }, [id]);
+    fetchImageDetails()
+  }, [id])
 
   return (
     <>
@@ -38,7 +38,7 @@ const ImageDetail = () => {
         </p>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ImageDetail;
+export default ImageDetail

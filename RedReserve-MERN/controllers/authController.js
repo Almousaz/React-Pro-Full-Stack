@@ -1,6 +1,6 @@
-import { User } from "../models/UserModel.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { User } from '../models/UserModel.js';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const registerController = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ const registerController = async (req, res) => {
     if (exisitingUser) {
       return res.status(200).send({
         success: false,
-        message: "User aLready exists",
+        message: 'User aLready exists',
       });
     }
     //hash password
@@ -21,14 +21,14 @@ const registerController = async (req, res) => {
     await user.save();
     return res.status(201).send({
       success: true,
-      message: "User Registerd Successfully",
+      message: 'User Registerd Successfully',
       user,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Error In Register API",
+      message: 'Error In Register API',
       error,
     });
   }
@@ -40,14 +40,14 @@ const loginController = async (req, res) => {
     if (!user) {
       return res.status(404).send({
         success: false,
-        message: "Invalid Credentials",
+        message: 'Invalid Credentials',
       });
     }
     //check role
     if (user.role !== req.body.role) {
       return res.status(500).send({
         success: false,
-        message: "role dosent match",
+        message: 'role dosent match',
       });
     }
     //compare password
@@ -58,15 +58,15 @@ const loginController = async (req, res) => {
     if (!comparePassword) {
       return res.status(500).send({
         success: false,
-        message: "Invalid Credentials",
+        message: 'Invalid Credentials',
       });
     }
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
+      expiresIn: '1d',
     });
     return res.status(200).send({
       success: true,
-      message: "Login Successfully",
+      message: 'Login Successfully',
       token,
       user,
     });
@@ -74,7 +74,7 @@ const loginController = async (req, res) => {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Error In Login API",
+      message: 'Error In Login API',
       error,
     });
   }
@@ -85,14 +85,14 @@ const currentUserController = async (req, res) => {
     const user = await User.findOne({ _id: req.body.userId });
     return res.status(200).send({
       success: true,
-      message: "User Fetched Successfully",
+      message: 'User Fetched Successfully',
       user,
     });
   } catch (error) {
     console.log(error);
     return res.status(500).send({
       success: false,
-      message: "error in getting current user",
+      message: 'error in getting current user',
       error,
     });
   }

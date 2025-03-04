@@ -1,15 +1,15 @@
-import { userLogin, userRegister } from "../redux/feature/authActions";
-import store from "../redux/store";
+import { userLogin, userRegister } from '../redux/feature/authActions';
+import store from '../redux/store';
 
 export const handleLogin = (e, email, password, role) => {
   e.preventDefault();
   try {
-    if(!role || !email || !password){
-        return alert("Please Provide All Fields")
+    if (!role || !email || !password) {
+      return alert('Please Provide All Fields');
     }
-    store.dispatch(userLogin({e, email, password, role}));
+    store.dispatch(userLogin({ e, email, password, role }));
   } catch (error) {
-    console.log("Error in login: ", error);
+    console.log('Error in login: ', error);
   }
 };
 export const handleRegister = (
@@ -26,18 +26,20 @@ export const handleRegister = (
 ) => {
   e.preventDefault();
   try {
-    store.dispatch(userRegister(
-      {name,
-      role,
-      email,
-      password,
-      organisationName,
-      hospitalName,
-      website,
-      address,
-      phone}
-    ))
+    store.dispatch(
+      userRegister({
+        name,
+        role,
+        email,
+        password,
+        organisationName,
+        hospitalName,
+        website,
+        address,
+        phone,
+      })
+    );
   } catch (error) {
-    console.log("Error in Register: ", error);
+    console.log('Error in Register: ', error);
   }
 };

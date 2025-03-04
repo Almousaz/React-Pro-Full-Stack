@@ -10,7 +10,7 @@ import fileUpload from "express-fileupload";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import path from "path";
 import { fileURLToPath } from "url";
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
 
 const app = express();
 dotenv.config();

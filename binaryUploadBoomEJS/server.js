@@ -11,15 +11,11 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 
-
-
-
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
 // Passport config
 require("./config/passport")(passport);
-
 
 //Connect To Database
 connectDB();
@@ -43,17 +39,15 @@ app.use(methodOverride("_method"));
 // Setup Sessions - stored in MongoDB
 
 app.use(
-    session({
-      secret: "keyboard cat",
-      resave: false,
-      saveUninitialized: false,
-      store: MongoStore.create({
-        mongoUrl: process.env.DB_STRING , // Replace with your MongoDB URI
-      }),
-    })
-  );
-
-
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_STRING, // Replace with your MongoDB URI
+    }),
+  })
+);
 
 // Passport middleware
 app.use(passport.initialize());
@@ -66,11 +60,7 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 
-
-
-
-
 //Server Running
 app.listen(process.env.PORT, () => {
-    console.log("Server is running, you better catch it!");
-  });
+  console.log("Server is running, you better catch it!");
+});

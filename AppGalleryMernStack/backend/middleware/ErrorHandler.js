@@ -1,20 +1,20 @@
 const errorHandler = (err, req, res, next) => {
-    console.error(err.stack); // Log the error stack trace for debugging purposes
+  console.error(err.stack) // Log the error stack trace for debugging purposes
 
-    // Customize the error response based on the error type or status code
-    const status = err.status || 500;
-    const message = err.message || 'Internal Server Error';
-    
-    console.log('-- Error Handler ---', err);
+  // Customize the error response based on the error type or status code
+  const status = err.status || 500
+  const message = err.message || 'Internal Server Error'
 
-    res.status(status).json({
-        success: false,
-        error: {
-            message: message,
-            // Optionally, include more details if in a development environment
-            ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
-        }
-    });
-};
+  console.log('-- Error Handler ---', err)
 
-export default errorHandler;
+  res.status(status).json({
+    success: false,
+    error: {
+      message: message,
+      // Optionally, include more details if in a development environment
+      ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
+    },
+  })
+}
+
+export default errorHandler
